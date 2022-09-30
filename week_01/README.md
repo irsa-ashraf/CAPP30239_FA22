@@ -1,3 +1,3 @@
 # Irsa Ashraf
 
-![Data Selfie](../data_selfie.pdf)
+[](/images/data_selfie.pdf)
