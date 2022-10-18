@@ -4,8 +4,8 @@ d3.csv("library_visits_jan22.csv").then(data => {
         d.num = +d.num; // this forces a number
     };
 
-    const height = 600,
-          width = 800,
+    const height = 400,
+          width = 750,
           margin = ({ top: 25, right: 30, bottom: 35, left: 50 });
 
     // create svg 
