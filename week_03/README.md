@@ -1,3 +1,8 @@
+# Bar Chart Exercise
+For thsi week's assignment I created a bar chart that shows the number of library visits during Januray 2022 for libraries in different zipcodes of Chicago.
+
+
+
 # Final Project
 
 Title: Global Internet Usage 
