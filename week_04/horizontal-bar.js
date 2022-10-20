@@ -3,7 +3,7 @@
 d3.csv("covid.csv").then(data => {
 
     for (let d of data) {
-        d.cases = +d.cases; //force a number
+        d.cases = +d.cases; //force a number. d = what row we're on
     };
 
     data.sort((a, b) => b.cases - a.cases);
