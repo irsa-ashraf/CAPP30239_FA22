@@ -1,4 +1,4 @@
-/* D3 Area Chart */
+/* D3 Line Chart */
 
 const height = 500,
     width = 800,
@@ -10,27 +10,28 @@ const svg = d3.select("#chart")
 
 d3.csv('long-term-interest-monthly.csv').then(data => {
     let timeParse = d3.timeParse("%Y-%m");
-    
+
     for (let d of data) {
-        d.Value = +d.Value;
-        d.Date = timeParse(d.Date);
+        d.value = +d.Value;
+        d.Date = timeParse(d.Date); 
     }
 
     let x = d3.scaleTime()
-      .domain(d3.extent(data, d => d.Date))
-      .range([margin.left, width - margin.right]);
-    
+        .domain(d3.extent(data, d => d.Date))
+        .range([margin.left, width - margin.right])
+
     let y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.Value)])
-      .range([height - margin.bottom, margin.top]);
+        .domain([0, d3.max(data, d => d.Value)])
+
+    // console.log(data);
     
     svg.append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
+      .call(d3.axisBottom(x).tickSizeOuter(0)); // ticksize outer removes the downward hanging lines on the tick 
     
     svg.append("g")
       .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y).tickFormat(d => d + "%").tickSizeOuter(0).tickSize(-width));
+      .call(d3.axisLeft(y).tickSizeOuter(0).tickFormat(d => d + "%").tickSize(-width)); //ticksize -width gives grid lines 
 
     svg.append("text")
       .attr("class", "x-label")
@@ -50,15 +51,14 @@ d3.csv('long-term-interest-monthly.csv').then(data => {
       .attr("transform", "rotate(-90)")
       .text("Interest rate");
 
-    let area = d3.area()
-      .x(d => x(d.Date))
-      .y0(y(0))
-      .y1(d => y(d.Value));
+    let line = d3.line()
+        .x(d => x(d.Date))
+        .y(d => y(d.Value));
 
     svg.append("path")
-      .datum(data)
-      .attr("d", area)
-      .attr("fill", "pink")
-      .attr("stroke", "steelblue");
-    
+        .datum(data)
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue");
+
   });
