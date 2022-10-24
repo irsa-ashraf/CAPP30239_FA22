@@ -8,20 +8,20 @@ const svg = d3.select("#chart")
     .append("svg")
     .attr("viewBox", [0, 0, width, height]);
 
-d3.csv('long-term-interest-monthly.csv').then(data => {
+d3.csv('long-term-interest-canada.csv').then(data => {
     let timeParse = d3.timeParse("%Y-%m"); // parse time to JS format so code can read it
 
     for (let d of data) {
-        d.Value = +d.Value;
-        d.Date = timeParse(d.Date); // using timeParse function we created above
+        d.Num = +d.Num;
+        d.Month = timeParse(d.Month); // using timeParse function we created above
     }
 
     let x = d3.scaleTime()
-        .domain(d3.extent(data, d => d.Date)) // returns an array
+        .domain(d3.extent(data, d => d.Month)) // returns an array
         .range([margin.left, width - margin.right]);
 
     let y = d3.scaleLinear()
-        .domain([0,d3.max(data, d => d.Value)]).nice() // nice to round up axis tick
+        .domain([0,d3.max(data, d => d.Num)]).nice() // nice to round up axis tick
         .range([height - margin.bottom, margin.top]);
     
     svg.append("g")
@@ -56,8 +56,8 @@ d3.csv('long-term-interest-monthly.csv').then(data => {
       .text("Interest rate");
     
     let line = d3.line()
-        .x(d => x(d.Date))
-        .y(d => y(d.Value))
+        .x(d => x(d.Month))
+        .y(d => y(d.Num))
         .curve(d3.curveNatural); // more: https://observablehq.com/@d3/d3-line#cell-244
 
     svg.append("path")
