@@ -4,16 +4,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shootings by Race and Illness</title>
+  <title>Police Shootings in the US (2015)</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <div class="container">
-    <h1> Shootings </h1>
-    <!-- <p>Data from 
-      <a href="https://www.fda.gov/food/food-labeling-nutrition/raw-fruits-poster-text-version-accessible-version">
-      FDA</a></p> -->
-    <div id="chart"></div>
+    <h1> Shootings by Race and Mental Health </h1>
+    <p>
+        We chose a stacked bar graph to show the race of each of the victims and whether they had a mental illness or not at the time they were shot. We chose this chart to present the data because it allows us to present multiple categories of qualitative data (race and mental illness) in a way thats very easy to understand.  
+    </p>
+    <div id="stacked-chart"></div>
+  </div>
+  <div class="container">
+    <h1>Monthly Police Shootings in 2015</h1>
+    <p>
+        We chose a bar chart to show the number of shootings for each month of the year. The vertical bars make it very easy to compare the different months and identify the months when shootings were the highest. 
+    </p>
+    <div id="bar-chart"></div>
+  </div>
+  <div class="container">
+    <h1>Shootings by Gender</h1>
+    <p>
+        We used a donut chart to show the gender of victims of police shooting. We chose this chart because it does a great job of showing the gender of the victims as a proportion of the total victims. The donut chart shows that most of the people who were shot were male. Since there are only two categories, the chart is very easy to understand. 
+    </p>
+    <div id="ring-chart" class="ring"></div>
   </div>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -21,9 +35,9 @@
 
     const width = 860,
           height = 400,
-          margin = {top: 40, right: 30, bottom: 20, left: 20};
+          margin = {top: 25, right: 30, bottom: 20, left: 40};
     
-    const svg = d3.select("#chart")
+    const svg = d3.select("#stacked-chart")
       .append("svg")
       .attr("viewBox", [0, 0, width, height]);
     
@@ -64,6 +78,31 @@
         .attr("height", d => y(d[0]) - y(d[1]))
         .attr("width",x.bandwidth());
 
+      svg.append("text") // add title
+        .attr("x", width / 2 )
+        .attr("y", 10)
+        .style("text-anchor", "middle")
+        .style("font-size", "14px") 
+        .text("Police Shootings by Race for Mentally Ill Victims");
+      
+      svg.append("text") // add x axis label
+        .attr("class", "x label")
+        .attr("text-anchor", "middle")
+        .attr("x", width - 40)
+        .attr("y", height - 2)
+        .style("font-size", "16px") 
+        .text("Race");
+
+      svg.append("text") // add y axis label
+        .attr("class", "y label")
+        .attr("text-anchor", "top")
+        .attr("x", width)
+        .attr("y", height)
+        .attr("y", 140)
+        .attr("dy", ".75em")
+        .style("font-size", "16px") 
+        .text("Number of shootings");
+
       let legendGroup = svg
         .selectAll(".legend-group")
         .data(subgroups)
@@ -85,6 +124,8 @@
     });
     
     </script>
+    <script src="monthly_shootings.js"></script>
+    <script src="gender_ring.js"></script>
   
 </body>
 </html>
