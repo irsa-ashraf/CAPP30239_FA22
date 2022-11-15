@@ -1,0 +1,31 @@
+Category,Price,Rating,Count
+American (New),$$,4.0588235294117645,34
+American (New),$$$,4.078947368421052,19
+American (New),$$$$,4.357142857142857,7
+Chinese,$,4.375,8
+Chinese,$$,4.2272727272727275,11
+Chinese,$$$,4.0,1
+Chinese,$$$$,4.0,1
+Cocktail Bars,$$,4.342105263157895,19
+Cocktail Bars,$$$,4.166666666666667,3
+French,$$,4.2727272727272725,11
+French,$$$,4.2,10
+French,$$$$,4.0,1
+Italian,$,4.5,1
+Italian,$$,4.2,35
+Italian,$$$,4.130434782608695,23
+Italian,$$$$,4.25,2
+Japanese,$,4.5,1
+Japanese,$$,4.166666666666667,21
+Japanese,$$$,4.2,5
+Japanese,$$$$,4.833333333333333,3
+Korean,$,4.0,1
+Korean,$$,4.3478260869565215,23
+Korean,$$$,4.25,2
+Korean,$$$$,5.0,1
+Mexican,$$,4.194444444444445,18
+Mexican,$$$,4.25,4
+Seafood,$$,4.083333333333333,12
+Seafood,$$$,4.25,6
+Thai,$$,4.342105263157895,19
+Thai,$$$,4.5,2

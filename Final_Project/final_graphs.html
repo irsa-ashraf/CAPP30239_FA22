@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis of Restaurants in New York City via Yelp Data</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1> Restaurants by Category, Ratings and Price </h1>
+    <p>
+        This stacked bar graph shows the top ten restaurants by category in New York City. For each category, I have visualized the average rating by price 
+    </p>
+    <div id="stacked-chart"></div>
+  </div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+
+    const width = 860,
+          height = 400,
+          margin = {top: 25, right: 30, bottom: 20, left: 40};
+    
+    const svg = d3.select("#stacked-chart")
+      .append("svg")
+      .attr("viewBox", [0, 0, width, height]);
+    
+    d3.csv("stacked_bar.csv").then( data => {
+    
+      let x = d3.scaleBand(data.map(d => (d.Category)),[margin.left, width - margin.right])
+        .padding([0.2]);
+
+      let y = d3.scaleLinear([0,20],[height - margin.bottom, margin.top]);
+
+      svg.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x))
+
+      svg.append("g")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y).tickSize(-width + margin.left + margin.right))
+      
+      // Price 
+      const subgroups = data.columns.slice(1);
+
+      const color = d3.scaleOrdinal(subgroups,['#e41a1c','#4daf4a', '#377eb8', '#984ea3']);
+    
+      const stackedData = d3.stack()
+        .keys(subgroups)(data);
+
+      svg.append("g")
+        .selectAll("g")
+        .data(stackedData)
+        .join("g")
+        .attr("fill", d => color(d.key))
+        .selectAll("rect")
+        .data(d => d)
+        .join("rect")
+        .attr("x", d => x(d.data.Category))
+        .attr("y", d => y(d[1]))
+        .attr("height", d => y(d[0]) - y(d[1]))
+        .attr("width",x.bandwidth());
+
+      svg.append("text") // add title
+        .attr("x", width / 2 )
+        .attr("y", 10)
+        .style("text-anchor", "middle")
+        .style("font-size", "14px") 
+        .text("Restaurant Categories and their Average Ratings per Price Level");
+      
+      svg.append("text") // add x axis label
+        .attr("class", "x label")
+        .attr("text-anchor", "middle")
+        .attr("x", width - 40)
+        .attr("y", height - 2)
+        .style("font-size", "16px") 
+        .text("Category");
+
+      svg.append("text") // add y axis label
+        .attr("class", "y label")
+        .attr("text-anchor", "top")
+        .attr("x", width)
+        .attr("y", height)
+        .attr("y", 140)
+        .attr("dy", ".75em")
+        .style("font-size", "16px") 
+        .text("Average Ratings");
+
+      let legendGroup = svg
+        .selectAll(".legend-group")
+        .data(subgroups)
+        .join("g")
+        .attr("class", "legend-group");
+
+      legendGroup
+        .append("circle")
+        .attr("cx", (d, i) => (10 + (i * 75)))
+        .attr("cy",10)
+        .attr("r", 3)
+        .attr("fill", (d, i) => color(i));
+      
+      legendGroup
+        .append("text")
+        .attr("x", (d, i) => (20 + (i * 75)))
+        .attr("y",15)
+        .text((d, i) => subgroups[i]);
+    });
+    
+    </script>
+</body>
+</html>
