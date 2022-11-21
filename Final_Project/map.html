@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <meta charset="utf-8">
     <title>Display a map on a webpage</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -30,14 +31,43 @@
         map.setFog({}); // Set the default atmosphere style
     });
     </script>
+
     <script>
-    // d3.json('Italian_map_data.json').then((data) => {
-    //     for (var l of data) {
-    //         let marker = new mapboxgl.Marker({
-    //             color: "#e41a1c"
-    //         }).setLngLat([l.Longitude, l.Latitude])
-    //         .addTo(map);
-    //     }
+    
+    d3.json("map_data.json").then((data) => {
+        data = JSON.parse(data);
+
+        const group = d3.group(data, (d) => d.Category);
+        for (var g of group) {
+          console.log(g);
+        }
+        for (var l of g) {
+            console.log(l)
+            let marker = new mapboxgl.Marker({
+                color: "#e41a1c"
+            }).setLngLat([l.Longitude, l.Latitude])
+            .addTo(map);
+        }
+      });
+
+
+
+    // d3.json('map_data.json').then((data) => {
+    //     const groups = d3.group(data, d => d.Category)
+    //     console.log(groups)
+        // for (var l of data) {
+        //     let marker = new mapboxgl.Marker({
+        //         color: "#e41a1c"
+        //     }).setLngLat([l.Longitude, l.Latitude])
+        //     .addTo(map);
+
+        // for (var l of g) {
+        //     let marker = new mapboxgl.Marker({
+        //         color: "#e41a1c"
+        //     }).setLngLat([l.Longitude, l.Latitude])
+        //     .addTo(map);
+        // }
+    // })
         
 
         // let latArr = [
@@ -53,7 +83,7 @@
         //     .addTo(map);
         // }
 
-    let catArr = [
+    let itaArr = [
             {"Longitude":-73.99597,"Latitude":40.736218,"Category":"Italian"},
             {"Longitude":-73.9916549605,"Latitude":40.703306333,"Category":"Italian"},
             {"Longitude":-73.996233,"Latitude":40.722766,"Category":"Italian"},
@@ -68,19 +98,8 @@
             {"Longitude":-73.98316,"Latitude":40.69446,"Category":"Italian"},
             {"Longitude":-73.9892,"Latitude":40.74358,"Category":"Italian"},{"Longitude":-74.0023324639,"Latitude":40.7061161833,"Category":"Italian"},{"Longitude":-74.00197,"Latitude":40.73778,"Category":"Italian"},{"Longitude":-73.99734,"Latitude":40.71958,"Category":"Italian"},{"Longitude":-73.96662,"Latitude":40.71341,"Category":"Italian"},{"Longitude":-74.0027042736,"Latitude":40.7073744314,"Category":"Italian"},{"Longitude":-74.00775,"Latitude":40.73959,"Category":"Italian"},{"Longitude":-73.949612,"Latitude":40.714166,"Category":"Italian"},{"Longitude":-73.9593493648,"Latitude":40.7312720665,"Category":"Italian"},{"Longitude":-73.995206,"Latitude":40.720572,"Category":"Italian"},{"Longitude":-73.992492,"Latitude":40.7225353,"Category":"Italian"},{"Longitude":-73.98894,"Latitude":40.72043,"Category":"Italian"},{"Longitude":-74.0020404,"Latitude":40.7074747,"Category":"Italian"},{"Longitude":-73.9641488,"Latitude":40.7158556938,"Category":"Italian"},{"Longitude":-73.9866533314,"Latitude":40.7574984873,"Category":"Italian"},{"Longitude":-73.95236,"Latitude":40.71757,"Category":"Italian"},{"Longitude":-73.988382,"Latitude":40.727966,"Category":"Italian"},{"Longitude":-73.9852072054,"Latitude":40.7229078654,"Category":"Italian"},{"Longitude":-73.9910154778,"Latitude":40.6867572791,"Category":"Italian"},{"Longitude":-74.00015,"Latitude":40.73069,"Category":"Italian"},{"Longitude":-74.00753,"Latitude":40.71087,"Category":"Italian"},{"Longitude":-74.0100390724,"Latitude":40.7198601301,"Category":"Italian"},{"Longitude":-74.0019013,"Latitude":40.726843,"Category":"Italian"},{"Longitude":-73.995711,"Latitude":40.683438,"Category":"Italian"},{"Longitude":-73.9982864847,"Latitude":40.7524054938,"Category":"Italian"},{"Longitude":-74.00449,"Latitude":40.72995,"Category":"Italian"},{"Longitude":-73.97965,"Latitude":40.73512,"Category":"Italian"},{"Longitude":-73.95136,"Latitude":40.71338,"Category":"Italian"},{"Longitude":-74.0305586856,"Latitude":40.6241757758,"Category":"Italian"},{"Longitude":-74.00403,"Latitude":40.72229,"Category":"Italian"},{"Longitude":-74.00127,"Latitude":40.72161,"Category":"Italian"},{"Longitude":-73.966629,"Latitude":40.686412,"Category":"Italian"},{"Longitude":-73.98587,"Latitude":40.68562,"Category":"Italian"},{"Longitude":-73.9763467,"Latitude":40.7804910197,"Category":"Italian"},{"Longitude":-73.99722,"Latitude":40.71981,"Category":"Italian"},{"Longitude":-73.986767,"Latitude":40.759876,"Category":"Italian"},{"Longitude":-74.00847,"Latitude":40.73285,"Category":"Italian"},{"Longitude":-73.9807260017,"Latitude":40.6642062,"Category":"Italian"},{"Longitude":-74.0036677725,"Latitude":40.7331482319,"Category":"Italian"},{"Longitude":-74.002571,"Latitude":40.707492,"Category":"Italian"},{"Longitude":-74.00607,"Latitude":40.73401,"Category":"Italian"},{"Longitude":-73.99228,"Latitude":40.7272,"Category":"Italian"},{"Longitude":-74.0001497,"Latitude":40.728,"Category":"Italian"},{"Longitude":-74.000045,"Latitude":40.7276,"Category":"Italian"},{"Longitude":-73.99794,"Latitude":40.71832,"Category":"Italian"},{"Longitude":-74.0018919,"Latitude":40.7262073,"Category":"Italian"},{"Longitude":-73.99794,"Latitude":40.71832,"Category":"Italian"},{"Longitude":-74.0018919,"Latitude":40.7262073,"Category":"Italian"},{"Longitude":-74.0069681,"Latitude":40.7451419,"Category":"Italian"},{"Longitude":-73.982956,"Latitude":40.73541417,"Category":"Italian"},{"Longitude":-73.967177,"Latitude":40.693154,"Category":"Italian"},{"Longitude":-73.967177,"Latitude":40.693154,"Category":"Italian"},{"Longitude":-73.9800099,"Latitude":40.66458,"Category":"Italian"},{"Longitude":-73.997972,"Latitude":40.677328,"Category":"Italian"},{"Longitude":-74.001238,"Latitude":40.730508,"Category":"Italian"},{"Longitude":-73.992244,"Latitude":40.684439,"Category":"Italian"},{"Longitude":-74.00932,"Latitude":40.73885,"Category":"Italian"},{"Longitude":-73.994516,"Latitude":40.755403,"Category":"Italian"},{"Longitude":-73.9986311488,"Latitude":40.7371069681,"Category":"Italian"},{"Longitude":-74.0024,"Latitude":40.68412,"Category":"Italian"},{"Longitude":-73.956678,"Latitude":40.722121,"Category":"Italian"},{"Longitude":-73.9937,"Latitude":40.75619,"Category":"Italian"},{"Longitude":-73.9806749,"Latitude":40.7618958767,"Category":"Italian"},{"Longitude":-73.9899391074,"Latitude":40.7420082489,"Category":"Italian"},{"Longitude":-73.9976472073,"Latitude":40.7219179851,"Category":"Italian"},{"Longitude":-73.9787254,"Latitude":40.666091,"Category":"Italian"},{"Longitude":-73.9856,"Latitude":40.744509,"Category":"Italian"},{"Longitude":-74.0091255,"Latitude":40.720799,"Category":"Italian"}]
 
-        // let latArr = [
-        //     {
-        //         "lat": -73.995970, 
-        //         "long": 40.736218,
-        //         "name": "Chez vou",
-        //         "color": "blue"
-        //     },
-        //     {
 
-        //     }
-        // ]
-
-        for (var l of catArr) {
+        for (var l of itaArr) {
             let marker = new mapboxgl.Marker({
                 color: "#e41a1c"
             }).setLngLat([l.Longitude, l.Latitude])

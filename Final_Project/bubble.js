@@ -1,17 +1,16 @@
+// https://d3-graph-gallery.com/graph/circularpacking_basic.html
+
 d3.csv("bubble.csv").then( function(data) {
 
     // set the dimensions and margins of the graph
     const width = 800
-    const height = 650
+    const height = 550
 
     // append the svg object to the body of the page
     const svg = d3.select("#bubble_chart")
     .append("svg")
         .attr("width", width)
         .attr("height", height)
-
-// Read data
-// d3.csv("bubble.csv").then( function(data) {
 
   // Filter a bit the data -> more than 1 million inhabitants
 //   data = data.filter(function(d){ return d.value>10000000 })
