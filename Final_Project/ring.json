@@ -1,0 +1,17 @@
+[{"Category": "American (New)", "Values": [{"category": "$$", "amount": 56.666667}, {"category": "$$$", "amount": 31.666667}, 
+                {"category": "$$$$", "amount": 11.666667}]},
+        {"Category" :"Chinese", "Values": [{"category": "$", "amount": 38.095238}, {"category": "$$", "amount": 52.380952}, 
+            {"category": "$$", "amount": 4.761905}, {"category": "$$", "amount": 4.761905}]},
+        {"Category": "Cocktail Bars", "Values" :[{"category": "$$", "amount": 86.3636368}, {"category": "$$$", "amount": 13.636364}]},
+        {"Category": "French", "Values": [{"category": "$$", "amount": 50.000000}, {"category": "$$$", "amount": 45.454545}, 
+            {"category": "$$$$", "amount": 4.545455}]},
+        {"Category": "Italian", "Values": [{"category": "$", "amount": 1.639344}, {"category": "$$", "amount": 57.377049}, 
+            {"category": "$$$", "Values": 37.704918}, {"category": "$$$$", "amount": 3.278689}]},
+        {"Category": "Japanese", "Values": [{"category": "$", "amount": 3.333333}, {"category": "$$", "amount": 70.000000}, 
+            {"category": "$$$", "Values": 16.666667}, {"category": "$$$$", "amount": 10.000000}]},
+        {"Category": "Korean", "Values": [{"category": "$", "amount": 3.703704}, {"category": "$$", "amount": 85.185185}, 
+            {"category": "$$$", "Values": 7.407407}, {"category": "$$$$", "amount": 3.703704}]},
+        {"Category": "Mexican", "Values": [{"category": "$$", "amount": 81.818182}, {"category": "$$$", "amount": 18.181818}]},
+        {"Category": "Seafood", "Values": [{"category": "$$", "amount": 66.666667}, {"category": "$$", "amount": 33.333333}]},
+        {"Category": "Thai", "Values": [{"category": "$$", "amount": 90.4761907}, {"category": "$$", "amount": 9.523810}]}
+]
