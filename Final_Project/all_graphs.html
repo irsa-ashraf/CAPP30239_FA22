@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-
-    <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v6.js"></script>
-
-    <!-- Create a div where the graph will take place -->
+    <title>Final Project</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<!-- Style tag code for bubble chart -->
+<style>
+    * {
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    h1 {
+        margin-bottom: 0px;
+    }
+    h2 {
+        font-size: 1em;
+        font-weight: normal;
+    }
+    .container {
+        margin: 0 auto;
+        max-width: 1200px;
+        text-align: center;
+    }
+    .title {
+        margin-top: 40px;
+        margin-bottom: 80px;
+    }
+    .flex {
+        display: flex;
+        width: 100%;
+        height: 300px;
+    }
+    .flex .col {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+    }
+    .svg-tooltip {
+          background: rgba(21, 29, 46, 0.9);
+          border-radius: 5px;
+          color: #fff;
+          display: block;
+          font-size: 12px;
+          line-height: 16px;
+          text-transform: none;
+          max-width: 320px;
+          padding: 1rem;
+          position: absolute;
+          text-overflow: ellipsis;
+          white-space: pre;
+          z-index: 300;
+          visibility: hidden;
+        }
+    
+    @media (max-width: 768px) {
+        .flex .col {
+            min-width: 100%;
+        }
+    }
+    </style>
 </head>
+
 
 <body>
     <div class="container">
         <h1> A quick look at the different restaurant categories in New York City </h1>
-        <p>
-            <!-- We chose a stacked bar graph to show the race of each of the victims and whether they had a mental illness or not at the time they were shot. We chose this chart to present the data because it allows us to present multiple categories of qualitative data (race and mental illness) in a way thats very easy to understand.   -->
-        </p>
-        <div id="bubble_chart"></div>
+        <div id="bubble-chart"></div>
     </div>
     <div class="container">
         <h1> Percentage of Restaurants by Price </h1>
@@ -26,140 +73,16 @@
     </div>
     <div class="container">
         <h1> Effect of Price on Restaurant Ratings </h1>
-        <p>
-            <!-- This page shows the percentage of restaurants by price -->
         <div id="heatmap"></div>
     </div>
 
     <script src="https://d3js.org/d3.v6.js"></script>
-    <script src="bubble.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="bubble2.js"></script>
     <script src="ring.js"></script>
-
-    <script>
-
-        // HEATMAP STARTS HERE 
-
-        // set the dimensions and margins of the graph
-        const margin = { top: 70, right: 70, bottom: 70, left: 70 },
-            width = 800 - margin.left - margin.right,
-            height = 650 - margin.top - margin.bottom;
-
-        // append the svg object to the body of the page
-        const svg = d3.select("#heatmap")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
-
-        // Labels of row and columns
-        const myGroups = ["American (New)", "Chinese", "Cocktail Bars", "French", "Italian", "Japanese", "Korean", "Mexican", "Seafood", "Thai"]
-        const myVars = ["$", "$$", "$$$", "$$$$"]
-
-        // Build X scales and axis:
-        const x = d3.scaleBand()
-            .range([0, width])
-            .domain(myGroups)
-            .padding(0.001);
-        svg.append("g")
-            .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(x))
-
-        // Build X scales and axis:
-        const y = d3.scaleBand()
-            .range([height, 0])
-            .domain(myVars)
-            .padding(0.001);
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        // Build color scale (advanced heatmap)
-        const myColor = d3.scaleSequential()
-            // .interpolator(d3.interpolateInferno)
-            // .interpolator(d3.interpolateGreens)
-            .range(["#f7fcf5", "#e8f6e3", "#b7e2b1", "#97d494", "#4daf62", "#2f984f", "#157f3b", "#036429", "#00441b"])
-            .domain([1, 5])
-
-        // QUESTION: I dont understand this code for the advanced color 
-
-        // The tooltips are added in the advanced version 
-        // create a tooltip
-        const tooltip = d3.select("#heatmap")
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-
-        // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function (event, d) {
-            tooltip
-                .style("opacity", 1)
-            d3.select(this)
-                .style("stroke", "black")
-                .style("opacity", 1)
-        }
-        const mousemove = function (event, d) {
-            tooltip
-                .html("The exact value of<br>this cell is: " + d.Rating)
-                .style("left", (event.x) / 2 + "px")
-                .style("top", (event.y) / 2 + "px")
-        }
-        const mouseleave = function (event, d) {
-            tooltip
-                .style("opacity", 0)
-            d3.select(this)
-                .style("stroke", "none")
-                .style("opacity", 0.8)
-        }
-
-        //Read the data
-        d3.csv("stacked_bar_.csv").then(function (data) {
-
-            // For advanced heatmap: add the squares
-            svg.selectAll()
-                .data(data, function (d) { return d.Category + ':' + d.Price; })
-                .join("rect")
-                .attr("x", function (d) { return x(d.Category) })
-                .attr("y", function (d) { return y(d.Price) })
-                .attr("rx", 4)
-                .attr("ry", 4)
-                .attr("width", x.bandwidth())
-                .attr("height", y.bandwidth())
-                .style("fill", function (d) { return myColor(d.Rating) })
-                .style("stroke-width", 4)
-                .style("stroke", "none")
-                .style("opacity", 0.8)
-                .on("mouseover", mouseover)
-                .on("mousemove", mousemove)
-                .on("mouseleave", mouseleave)
-        })
-
-        // Add title to graph
-        svg.append("text")
-            .attr("x", 0)
-            .attr("y", -50)
-            .attr("text-anchor", "left")
-            .style("font-size", "22px")
-            .text("Average Restaurant Ratings by Price and Category");
-
-
-        // Add subtitle to graph
-        svg.append("text")
-            .attr("x", 0)
-            .attr("y", -20)
-            .attr("text-anchor", "left")
-            .style("font-size", "14px")
-            .style("fill", "grey")
-            .style("max-width", 400)
-            .text("The chart shows a breakdowm of average ratings received by a restaurant based on its the category and how expensive it is. \
-           Darker shade represents lower ratings");
-    </script>
+    <script src="heatmap.js"></script>
 </body>
+    
 
 <!-- Beginning of map code  -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
