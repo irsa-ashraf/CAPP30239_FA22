@@ -1,0 +1,145 @@
+<!-- <!DOCTYPE html> -->
+<meta charset="utf-8">
+<head>
+  <title>Force layout (x axis)</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+</head>
+
+<style>
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+h1 {
+    margin-bottom: 0px;
+}
+h2 {
+    font-size: 1em;
+    font-weight: normal;
+}
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    text-align: center;
+}
+.title {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+.flex {
+    display: flex;
+    width: 100%;
+    height: 300px;
+}
+.flex .col {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+.svg-tooltip {
+      background: rgba(69, 77, 93, .9);
+      border-radius: 5px;
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: none;
+      max-width: 320px;
+      padding: 1rem;
+      position: absolute;
+      text-overflow: ellipsis;
+      white-space: pre;
+      z-index: 300;
+      visibility: hidden;
+    }
+
+@media (max-width: 768px) {
+    .flex .col {
+        min-width: 100%;
+    }
+}
+</style>
+
+<body>
+    <div class="container">
+       <div id="chart"></div>
+    </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+
+    let width = 1000,
+    height = 500;
+
+    const radius = 20;
+
+    let margin = 0;
+
+    let svg = d3.select("#chart")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+    d3.csv("data.csv").then(data => {
+    
+        let result = d3.group(data, d => d.period);
+
+        console.log(result)
+
+        let rScale = d3.scaleLinear()
+            .range([5,25])
+            .domain(d3.extent(data, d => d.rating));
+
+        let colors = d3.scaleOrdinal()
+            .range(['#B42F90', '#16B1AC', '#FF0909', '#6985DD', '#0BE304', '#9A303D', '#979883', '#FF09D3', '#FF7C09', '#EFE71F', '#7FA25A', '#7A57C7', '#804C13', '#C2C757', '#1F52EF'])
+            .domain(d3.extent(data, d => d.rating));
+
+        let simulation = d3.forceSimulation(data)
+            .force("charge", d3.forceManyBody().strength(1000)) //strength
+            .force('x', d3.forceX().x(250))
+            .force('y', d3.forceY().y(height/2))
+            .force("collision", d3.forceCollide().radius(radius));
+
+        let g = svg.append("g")
+            .attr("class", "group");
+
+        simulation.on("tick", () => {
+            g.selectAll("circle")
+            .data(data)
+            .join("circle")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .attr("r", d => (rScale(d.rating)))
+            .attr("fill", "red")
+            .attr("opacity", 0.75)
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .on("mouseover", function (event, d) {
+                d3.select(this).attr("opacity", 1);
+
+                tooltip
+                .style("visibility", "visible")
+                .html(`${d.author}<br />${d.rating}`);
+            })
+            .on("mousemove", function (event) {
+                tooltip
+                .style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+            })
+            .on("mouseout", function () {
+                d3.select(this).attr("opacity", 0.75);
+                tooltip.style("visibility", "hidden");
+            })
+        })
+
+        for (let i = 0; i < 100; i++) {
+            simulation.tick()
+        }
+        });
+
+        const tooltip = d3.select("body").append("div")
+        .attr("class", "svg-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden");
+  </script>
+</body>
+</html>

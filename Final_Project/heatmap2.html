@@ -97,17 +97,6 @@
     //Read the data
     d3.csv("stacked_bar_.csv").then( function(data) {
     
-    // // For basic heatmap 
-    //   svg.selectAll()
-    //       .data(data, function(d) {return d.Category+':'+d.Price;})
-    //       .join("rect")
-    //       .attr("x", function(d) { return x(d.Category) })
-    //       .attr("y", function(d) { return y(d.Price) })
-    //       .attr("width", x.bandwidth() )
-    //       .attr("height", y.bandwidth() )
-    //       .style("fill", function(d) { return myColor(d.Rating)} )
-    
-    // })
 
       // For advanced heatmap: add the squares
     svg.selectAll()
@@ -133,6 +122,7 @@
         .attr("x", 0)
         .attr("y", -50)
         .attr("text-anchor", "left")
+        .attr("transform", "rotate(-90)")
         .style("font-size", "22px")
         .text("Average Restaurant Ratings by Price and Category");
 

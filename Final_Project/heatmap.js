@@ -15,7 +15,7 @@ const svg = d3.select("#heatmap")
 
 // Labels of row and columns
 const myGroups = ["American (New)", "Chinese", "Cocktail Bars", "French", "Italian", "Japanese", "Korean", "Mexican", "Seafood", "Thai"]
-const myVars = ["$", "$$", "$$$", "$$$$"]
+const myVars = ["$", "$$", "$$$", "$$$$$"]
 
 // Build X scales and axis:
 const x = d3.scaleBand()
@@ -24,6 +24,7 @@ const x = d3.scaleBand()
 .padding(0.001);
 svg.append("g")
 .attr("transform", `translate(0, ${height})`)
+// .attr("transform", "rotate(65)")
 .call(d3.axisBottom(x))
 
 // Build X scales and axis:
@@ -36,16 +37,18 @@ svg.append("g")
 
 // Build color scale (advanced heatmap)
 const myColor = d3.scaleSequential()
-// .interpolator(d3.interpolateInferno)
+.interpolator(d3.interpolateInferno)
 // .interpolator(d3.interpolateGreens)
-.range(["#f7fcf5", "#e8f6e3", "#b7e2b1", "#97d494", "#4daf62", "#2f984f", "#157f3b", "#036429", "#00441b"])
+// .range(["#fff5f0","#fee3d6","#fdc9b4","#fcaa8e","#fc8a6b","#f9694c","#ef4533","#d92723","#bb151a","#970b13","#67000d"])
+// .range(["red", "violet"])
+
 .domain([1, 5])
 
 // The tooltips are added in the advanced version 
 // create a tooltip
 const tooltip = d3.select("#heatmap")
 .append("div")
-.style("opacity", 0)
+.style("opacity", 10)
 .attr("class", "tooltip")
 .style("background-color", "white")
 .style("border", "solid")
@@ -98,21 +101,22 @@ svg.selectAll()
 })
 
 // Add title to graph
-svg.append("text")
-.attr("x", 0)
-.attr("y", -50)
-.attr("text-anchor", "left")
-.style("font-size", "22px");
+// svg.append("text")
+// .attr("x", 0)
+// .attr("y", 0)
+// .attr("text-anchor", "end")
+// .style("font-size", "30px")
 // .text("Average Restaurant Ratings by Price and Category");
+
 
 // Add subtitle to graph
 svg.append("text")
 .attr("x", 0)
-.attr("y", -20)
+.attr("y", -30)
 .attr("text-anchor", "left")
 .style("font-size", "14px")
-.style("fill", "grey")
-.style("max-width", 400)
+.style("fill", "black")
+.style("max-width", 800)
 .text("The chart shows a breakdowm of average ratings received by a restaurant based on its the category and how expensive it is. \
 Darker shade represents lower ratings");
 })();

@@ -60,68 +60,149 @@
 </head>
 
 
+<!-- Beginning of code for horizontal charts -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proportion of Restaurants by Price</title>
+    <style>
+        * { font-family: Arial, Helvetica, sans-serif; }
+        .flex-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: flex-start;
+            width: 100%;
+            max-width: 1040px;
+            height: 80vh;
+            overflow: auto;
+            flex-direction: row;
+            margin: 0 auto;
+        }
+        .flex-container .flex-item {
+            width: 100%;
+            min-height: 500px;
+            margin: 5px;
+        }
+        #horizontal-chart svg { display:inline-block; width:25.5% }
+        text { font-size: 16px; }
+        /* Responsive Design */
+        @media only screen and (max-width: 600px) {
+            .flex-container {
+                display: block;
+                width: 80%;
+                height: auto;
+            }
+            .flex-container .flex-item { min-height: auto; }
+        }
+    </style>
+</head>
+
+<!-- Beginning of Head code for map  -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Display a map on a webpage</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        /* Change this to fix map? */
+        #map {
+            width: 100%;
+            height: 500px
+        }
+    </style>
+</head>
+
 <body>
     <div class="container">
         <h1> A quick look at the different restaurant categories in New York City </h1>
         <div id="bubble-chart"></div>
     </div>
-    <div class="container">
-        <h1> Percentage of Restaurants by Price </h1>
-        <p>
-            This page shows the percentage of restaurants by price
-        <div id="ring_chart"></div>
+    <div class="flex-container">
+        <div id="horizontal-chart" class="flex-item">
+            <h1>Top 10 Categories and the Proportion of Restaurants by Price</h1>
+        </div>
     </div>
     <div class="container">
-        <h1> Effect of Price on Restaurant Ratings </h1>
+            <h1> Effect of Price on Restaurant Ratings </h1>
         <div id="heatmap"></div>
     </div>
-
+    <div class="container">
+        <div id="map"></div>
+            <h1> Restaurant Locations</h1>
+        <select>
+            <option value="All">All</option>
+            <option value="Thai">Thai</option>
+            <option value="Italian">Italian</option>
+            <option value="Korean">Korean</option>
+            <option value="French">French</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Cocktail Bars">Cocktail Bars</option>
+            <option value="American (New)">American (New)</option>
+        </select>  
+    </div>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="bubble2.js"></script>
-    <script src="ring.js"></script>
+    <script src="multiple_bars.js"></script>
     <script src="heatmap.js"></script>
+    <script src="map.js"></script>
+
 </body>
-    
+</html>
 
 <!-- Beginning of map code  -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<meta charset="utf-8">
-<title>Display a map on a webpage</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
+<!-- <head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <meta charset="utf-8">
+    <title>Display a map on a webpage</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        /* Change this to fix map? */
+        #map {
+            width: 100%;
+            height: 500px
+        }
+    </style>
+</head> -->
 
-    /* Change this to fix map? */
-    #map {
-        width: 100%;
-        height: 500px
-    }
-</style>
-<div class="container">
-    <select>
-        <option value="All">All</option>
-        <option value="Thai">Thai</option>
-        <option value="Italian">Italian</option>
-        <option value="Korean">Korean</option>
-        <option value="French">French</option>
-        <option value="Chinese">Chinese</option>
-        <option value="Seafood">Seafood</option>
-        <option value="Japanese">Japanese</option>
-        <option value="Mexican">Mexican</option>
-        <option value="Cocktail Bars">Cocktail Bars</option>
-        <option value="American (New)">American (New)</option>
+<!-- <body> -->
+    <!-- <div class="container">
+        <div id="map"></div>
+        <h1> Restaurant Locations</h1>
+        <select>
+            <option value="All">All</option>
+            <option value="Thai">Thai</option>
+            <option value="Italian">Italian</option>
+            <option value="Korean">Korean</option>
+            <option value="French">French</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Cocktail Bars">Cocktail Bars</option>
+            <option value="American (New)">American (New)</option>
+        </select>  
+    </div> -->
 
-    </select>
-    <div id="map"></div>
-</div>
-
-<script>
+<!-- <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXJzYS1hIiwiYSI6ImNsYWhxaG85bTFxd2QzeXMzZmE1eXJqdGYifQ.Nfa5rrFOUp9Zy86Ec1cLEA';
     const map = new mapboxgl.Map({
         container: 'map', // container ID
@@ -137,9 +218,9 @@
     map.on('style.load', () => {
         map.setFog({}); // Set the default atmosphere style
     });
-</script>
+    </script>
 
-<script> 
+    <script> 
 
     d3.json("map_data.json").then((data) => {
         data = JSON.parse(data)
@@ -174,68 +255,5 @@
                 currentMarkers.push(marker);
             }
         })})
-
-
-    // Code for the three cats from office hours 
-    // let itaArr = [
-    //     { "Longitude": -73.99597, "Latitude": 40.736218, "Category": "Italian" },
-    //     { "Longitude": -73.9916549605, "Latitude": 40.703306333, "Category": "Italian" },
-    //     { "Longitude": -73.996233, "Latitude": 40.722766, "Category": "Italian" },
-    //     { "Longitude": -73.989177, "Latitude": 40.702662, "Category": "Italian" },
-    //     { "Longitude": -73.964757, "Latitude": 40.715621, "Category": "Italian" },
-    //     { "Longitude": -74.00322, "Latitude": 40.72506, "Category": "Italian" },
-    //     { "Longitude": -73.971003, "Latitude": 40.689722, "Category": "Italian" },
-    //     { "Longitude": -73.999242, "Latitude": 40.674968, "Category": "Italian" },
-    //     { "Longitude": -73.997447, "Latitude": 40.718554, "Category": "Italian" },
-    //     { "Longitude": -74.00513, "Latitude": 40.73372, "Category": "Italian" },
-    //     { "Longitude": -73.99203, "Latitude": 40.69979, "Category": "Italian" },
-    //     { "Longitude": -73.98316, "Latitude": 40.69446, "Category": "Italian" },
-    //     { "Longitude": -73.9892, "Latitude": 40.74358, "Category": "Italian" }, { "Longitude": -74.0023324639, "Latitude": 40.7061161833, "Category": "Italian" }, { "Longitude": -74.00197, "Latitude": 40.73778, "Category": "Italian" }, { "Longitude": -73.99734, "Latitude": 40.71958, "Category": "Italian" }, { "Longitude": -73.96662, "Latitude": 40.71341, "Category": "Italian" }, { "Longitude": -74.0027042736, "Latitude": 40.7073744314, "Category": "Italian" }, { "Longitude": -74.00775, "Latitude": 40.73959, "Category": "Italian" }, { "Longitude": -73.949612, "Latitude": 40.714166, "Category": "Italian" }, { "Longitude": -73.9593493648, "Latitude": 40.7312720665, "Category": "Italian" }, { "Longitude": -73.995206, "Latitude": 40.720572, "Category": "Italian" }, { "Longitude": -73.992492, "Latitude": 40.7225353, "Category": "Italian" }, { "Longitude": -73.98894, "Latitude": 40.72043, "Category": "Italian" }, { "Longitude": -74.0020404, "Latitude": 40.7074747, "Category": "Italian" }, { "Longitude": -73.9641488, "Latitude": 40.7158556938, "Category": "Italian" }, { "Longitude": -73.9866533314, "Latitude": 40.7574984873, "Category": "Italian" }, { "Longitude": -73.95236, "Latitude": 40.71757, "Category": "Italian" }, { "Longitude": -73.988382, "Latitude": 40.727966, "Category": "Italian" }, { "Longitude": -73.9852072054, "Latitude": 40.7229078654, "Category": "Italian" }, { "Longitude": -73.9910154778, "Latitude": 40.6867572791, "Category": "Italian" }, { "Longitude": -74.00015, "Latitude": 40.73069, "Category": "Italian" }, { "Longitude": -74.00753, "Latitude": 40.71087, "Category": "Italian" }, { "Longitude": -74.0100390724, "Latitude": 40.7198601301, "Category": "Italian" }, { "Longitude": -74.0019013, "Latitude": 40.726843, "Category": "Italian" }, { "Longitude": -73.995711, "Latitude": 40.683438, "Category": "Italian" }, { "Longitude": -73.9982864847, "Latitude": 40.7524054938, "Category": "Italian" }, { "Longitude": -74.00449, "Latitude": 40.72995, "Category": "Italian" }, { "Longitude": -73.97965, "Latitude": 40.73512, "Category": "Italian" }, { "Longitude": -73.95136, "Latitude": 40.71338, "Category": "Italian" }, { "Longitude": -74.0305586856, "Latitude": 40.6241757758, "Category": "Italian" }, { "Longitude": -74.00403, "Latitude": 40.72229, "Category": "Italian" }, { "Longitude": -74.00127, "Latitude": 40.72161, "Category": "Italian" }, { "Longitude": -73.966629, "Latitude": 40.686412, "Category": "Italian" }, { "Longitude": -73.98587, "Latitude": 40.68562, "Category": "Italian" }, { "Longitude": -73.9763467, "Latitude": 40.7804910197, "Category": "Italian" }, { "Longitude": -73.99722, "Latitude": 40.71981, "Category": "Italian" }, { "Longitude": -73.986767, "Latitude": 40.759876, "Category": "Italian" }, { "Longitude": -74.00847, "Latitude": 40.73285, "Category": "Italian" }, { "Longitude": -73.9807260017, "Latitude": 40.6642062, "Category": "Italian" }, { "Longitude": -74.0036677725, "Latitude": 40.7331482319, "Category": "Italian" }, { "Longitude": -74.002571, "Latitude": 40.707492, "Category": "Italian" }, { "Longitude": -74.00607, "Latitude": 40.73401, "Category": "Italian" }, { "Longitude": -73.99228, "Latitude": 40.7272, "Category": "Italian" }, { "Longitude": -74.0001497, "Latitude": 40.728, "Category": "Italian" }, { "Longitude": -74.000045, "Latitude": 40.7276, "Category": "Italian" }, { "Longitude": -73.99794, "Latitude": 40.71832, "Category": "Italian" }, { "Longitude": -74.0018919, "Latitude": 40.7262073, "Category": "Italian" }, { "Longitude": -73.99794, "Latitude": 40.71832, "Category": "Italian" }, { "Longitude": -74.0018919, "Latitude": 40.7262073, "Category": "Italian" }, { "Longitude": -74.0069681, "Latitude": 40.7451419, "Category": "Italian" }, { "Longitude": -73.982956, "Latitude": 40.73541417, "Category": "Italian" }, { "Longitude": -73.967177, "Latitude": 40.693154, "Category": "Italian" }, { "Longitude": -73.967177, "Latitude": 40.693154, "Category": "Italian" }, { "Longitude": -73.9800099, "Latitude": 40.66458, "Category": "Italian" }, { "Longitude": -73.997972, "Latitude": 40.677328, "Category": "Italian" }, { "Longitude": -74.001238, "Latitude": 40.730508, "Category": "Italian" }, { "Longitude": -73.992244, "Latitude": 40.684439, "Category": "Italian" }, { "Longitude": -74.00932, "Latitude": 40.73885, "Category": "Italian" }, { "Longitude": -73.994516, "Latitude": 40.755403, "Category": "Italian" }, { "Longitude": -73.9986311488, "Latitude": 40.7371069681, "Category": "Italian" }, { "Longitude": -74.0024, "Latitude": 40.68412, "Category": "Italian" }, { "Longitude": -73.956678, "Latitude": 40.722121, "Category": "Italian" }, { "Longitude": -73.9937, "Latitude": 40.75619, "Category": "Italian" }, { "Longitude": -73.9806749, "Latitude": 40.7618958767, "Category": "Italian" }, { "Longitude": -73.9899391074, "Latitude": 40.7420082489, "Category": "Italian" }, { "Longitude": -73.9976472073, "Latitude": 40.7219179851, "Category": "Italian" }, { "Longitude": -73.9787254, "Latitude": 40.666091, "Category": "Italian" }, { "Longitude": -73.9856, "Latitude": 40.744509, "Category": "Italian" }, { "Longitude": -74.0091255, "Latitude": 40.720799, "Category": "Italian" },
-    //     { "Longitude": -73.9861267303, "Latitude": 40.7304087225, "Category": "Thai" }, { "Longitude": -73.960393, "Latitude": 40.7138759768, "Category": "Thai" }, { "Longitude": -73.987363, "Latitude": 40.732259, "Category": "Thai" }, { "Longitude": -73.9926038, "Latitude": 40.7183, "Category": "Thai" }, { "Longitude": -73.99065, "Latitude": 40.73902, "Category": "Thai" }, { "Longitude": -73.98991, "Latitude": 40.7629, "Category": "Thai" }, { "Longitude": -73.9942677, "Latitude": 40.6946130355, "Category": "Thai" }, { "Longitude": -73.993167, "Latitude": 40.733804, "Category": "Thai" }, { "Longitude": -73.9956057, "Latitude": 40.7207104296, "Category": "Thai" }, { "Longitude": -73.9893, "Latitude": 40.72374, "Category": "Thai" }, { "Longitude": -73.9868891, "Latitude": 40.703367486, "Category": "Thai" }, { "Longitude": -73.9961, "Latitude": 40.67795, "Category": "Thai" }, { "Longitude": -73.99643, "Latitude": 40.7218, "Category": "Thai" }, { "Longitude": -74.004213804, "Latitude": 40.72990742, "Category": "Thai" }, { "Longitude": -73.933508, "Latitude": 40.69583, "Category": "Thai" }, { "Longitude": -73.96121, "Latitude": 40.71194, "Category": "Thai" }, { "Longitude": -73.9972861, "Latitude": 40.7171895949, "Category": "Thai" }, { "Longitude": -73.9983, "Latitude": 40.71474, "Category": "Thai" }, { "Longitude": -74.0052369891, "Latitude": 40.7073890241, "Category": "Thai" }, { "Longitude": -74.005321, "Latitude": 40.708453, "Category": "Thai" }, { "Longitude": -73.97328, "Latitude": 40.69315, "Category": "Thai" }, { "Longitude": -73.999392, "Latitude": 40.729771, "Category": "Thai" }, { "Longitude": -73.954254, "Latitude": 40.743232, "Category": "Thai" }, { "Longitude": -73.98128, "Latitude": 40.73767, "Category": "Thai" }, { "Longitude": -73.968485, "Latitude": 40.679366, "Category": "Thai" }, { "Longitude": -73.9543802664, "Latitude": 40.7322576096, "Category": "Thai" }, { "Longitude": -73.9310911, "Latitude": 40.7039938, "Category": "Thai" }, { "Longitude": -73.95727, "Latitude": 40.77078, "Category": "Thai" }, { "Longitude": -73.998062, "Latitude": 40.6782327, "Category": "Thai" }, { "Longitude": -73.971286, "Latitude": 40.693005, "Category": "Thai" }, { "Longitude": -73.9863216752, "Latitude": 40.6892229764, "Category": "Thai" }, { "Longitude": -73.8886, "Latitude": 40.74319, "Category": "Thai" },
-    //     { "Longitude": -74.00184, "Latitude": 40.70757, "Category": "French" }, { "Longitude": -73.99766, "Latitude": 40.7327, "Category": "French" }, { "Longitude": -74.0043464096, "Latitude": 40.732704, "Category": "French" }, { "Longitude": -73.9982149184, "Latitude": 40.722689295, "Category": "French" }, { "Longitude": -73.9808411, "Latitude": 40.7626274, "Category": "French" }, { "Longitude": -73.9880941, "Latitude": 40.7456996892, "Category": "French" }, { "Longitude": -74.0057086945, "Latitude": 40.7243642217, "Category": "French" }, { "Longitude": -73.9563720201, "Latitude": 40.7132639977, "Category": "French" }, { "Longitude": -73.9888503, "Latitude": 40.7136187, "Category": "French" }, { "Longitude": -73.957873, "Latitude": 40.72191, "Category": "French" }, { "Longitude": -73.9894791546, "Latitude": 40.7316162601, "Category": "French" }, { "Longitude": -74.003915, "Latitude": 40.732484, "Category": "French" }, { "Longitude": -74.0028772, "Latitude": 40.733063, "Category": "French" }, { "Longitude": -73.98115, "Latitude": 40.72473, "Category": "French" }, { "Longitude": -73.991758, "Latitude": 40.719135, "Category": "French" }, { "Longitude": -74.00266, "Latitude": 40.70659, "Category": "French" }, { "Longitude": -73.9928337146, "Latitude": 40.6830415994, "Category": "French" }, { "Longitude": -73.98554, "Latitude": 40.75446, "Category": "French" }, { "Longitude": -74.00152, "Latitude": 40.73771, "Category": "French" }, { "Longitude": -73.9822988918, "Latitude": 40.6655697293, "Category": "French" }, { "Longitude": -73.95648, "Latitude": 40.71684, "Category": "French" }, { "Longitude": -74.00695, "Latitude": 40.73928, "Category": "French" }, { "Longitude": -73.9626279, "Latitude": 40.673109, "Category": "French" }, { "Longitude": -73.9955124433, "Latitude": 40.6907305802, "Category": "French" }, { "Longitude": -74.00995, "Latitude": 40.72188, "Category": "French" }, { "Longitude": -73.9597273, "Latitude": 40.6560593, "Category": "French" }, { "Longitude": -74.00363, "Latitude": 40.72331, "Category": "French" }, { "Longitude": -73.988257, "Latitude": 40.6879459, "Category": "French" }, { "Longitude": -74.0006073834, "Latitude": 40.7300047977, "Category": "French" }, { "Longitude": -73.9879689992, "Latitude": 40.7218274586, "Category": "French" }, { "Longitude": -73.99225, "Latitude": 40.68451, "Category": "French" }, { "Longitude": -73.98365, "Latitude": 40.74362, "Category": "French" }, { "Longitude": -73.9524272, "Latitude": 40.7177117058, "Category": "French" }, { "Longitude": -73.9511032104, "Latitude": 40.7258415222, "Category": "French" }, { "Longitude": -73.96913, "Latitude": 40.67749, "Category": "French" }
-    // ]
-
-    // var currentMarkers=[];
-    // for (var l of itaArr) {
-    //     let marker = new mapboxgl.Marker({
-    //     color: "#e41a1c"
-    //     }).setLngLat([l.Longitude, l.Latitude])
-    //         .addTo(map);
-    //     currentMarkers.push(marker);
-
-    // }
-
-    // End of office hour code 
-
-
-
-    
-
-// Original Office hour Code 
-    // d3.select("select")
-    //     .on("change", function (e, d) {
-    //         let newData = itaArr.filter(d => d.Category === e.target.value);
-    //         console.log(newData) 
-    //         // let marker = new mapboxgl.Marker().addTo(map);
-    //         if (currentMarkers!==null) {
-    //             for (var i = currentMarkers.length - 1; i >= 0; i--) {
-    //             currentMarkers[i].remove();
-    //             }
-    //         }
-    //         console.log(e.target.value)
-    //         for (var l of newData) {
-    //             let marker = new mapboxgl.Marker({
-    //             color: "#e41a1c"
-    //             }).setLngLat([l.Longitude, l.Latitude])
-    //                 .addTo(map);
-    //             currentMarkers.push(marker);
-    //         }
-    //     })
-//  End of Office hours code 
-
-</script>
-
-
-</body>
-
-</html>
+    </script> -->
+<!-- </html> -->
