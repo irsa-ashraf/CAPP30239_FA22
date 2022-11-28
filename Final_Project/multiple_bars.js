@@ -15,7 +15,7 @@ d3.csv("Cat_price_pcnt.csv").then(results => {
 
         data.sort((a, b) => b.Percentage - a.Percentage); 
 
-        const height = 300,
+        const height = 280,
             width = 600,
             margin = ({ top: 20, right: 50, bottom: 100, left: 100 });
 

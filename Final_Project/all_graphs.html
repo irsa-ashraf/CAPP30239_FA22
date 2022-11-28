@@ -75,8 +75,8 @@
             align-items: flex-start;
             align-content: flex-start;
             width: 100%;
-            max-width: 1040px;
-            height: 80vh;
+            max-width: 1200px;
+            height: 100vh;
             overflow: auto;
             flex-direction: row;
             margin: 0 auto;
@@ -161,99 +161,3 @@
 
 </body>
 </html>
-
-<!-- Beginning of map code  -->
-<!-- <head>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <meta charset="utf-8">
-    <title>Display a map on a webpage</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        /* Change this to fix map? */
-        #map {
-            width: 100%;
-            height: 500px
-        }
-    </style>
-</head> -->
-
-<!-- <body> -->
-    <!-- <div class="container">
-        <div id="map"></div>
-        <h1> Restaurant Locations</h1>
-        <select>
-            <option value="All">All</option>
-            <option value="Thai">Thai</option>
-            <option value="Italian">Italian</option>
-            <option value="Korean">Korean</option>
-            <option value="French">French</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Seafood">Seafood</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Cocktail Bars">Cocktail Bars</option>
-            <option value="American (New)">American (New)</option>
-        </select>  
-    </div> -->
-
-<!-- <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaXJzYS1hIiwiYSI6ImNsYWhxaG85bTFxd2QzeXMzZmE1eXJqdGYifQ.Nfa5rrFOUp9Zy86Ec1cLEA';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-73.9897, 40.7411], // Flatiron district = starting position [lng, lat]
-        zoom: 12, // starting zoom
-        projection: 'albers', // display the map as a 3D globe
-        attributionControl: false
-    });
-    map.addControl(new mapboxgl.AttributionControl(), 'bottom-right')
-
-    map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
-    });
-    </script>
-
-    <script> 
-
-    d3.json("map_data.json").then((data) => {
-        data = JSON.parse(data)
-        console.log(data)
-   
-        var currentMarkers=[];
-        for (var l of data) {
-            let marker = new mapboxgl.Marker({
-            color: l.Color
-            }).setLngLat([l.Longitude, l.Latitude])
-                .addTo(map);
-            currentMarkers.push(marker);
-
-    } 
-
-    d3.select("select")
-        .on("change", function (e, d) {
-            let newData = data.filter(d => d.Category === e.target.value);
-            // console.log(newData) 
-            // let marker = new mapboxgl.Marker().addTo(map);
-            if (currentMarkers!==null) {
-                for (var i = currentMarkers.length - 1; i >= 0; i--) {
-                currentMarkers[i].remove();
-                }
-            }
-            // console.log(e.target.value)
-            for (var l of newData) {
-                let marker = new mapboxgl.Marker({
-                color: l.Color
-                }).setLngLat([l.Longitude, l.Latitude])
-                    .addTo(map);
-                currentMarkers.push(marker);
-            }
-        })})
-    </script> -->
-<!-- </html> -->

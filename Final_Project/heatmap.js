@@ -24,7 +24,7 @@ const x = d3.scaleBand()
 .padding(0.001);
 svg.append("g")
 .attr("transform", `translate(0, ${height})`)
-// .attr("transform", "rotate(65)")
+// .attr("transform", "translate(-10, 0)rotate(-45)")
 .call(d3.axisBottom(x))
 
 // Build X scales and axis:
