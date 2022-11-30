@@ -19,22 +19,32 @@ map.on('style.load', () => {
 
 d3.json("map_data.json").then((data) => {
     data = JSON.parse(data)
-    console.log(data)
+    // console.log(data)
 
     var currentMarkers=[];
     for (var l of data) {
         let marker = new mapboxgl.Marker({
         color: l.Color
         }).setLngLat([l.Longitude, l.Latitude])
-            .addTo(map);
+            .addTo(map)
+            .on('click', (e) => {console.log('Hello')})
         currentMarkers.push(marker);
+        // map.on('click', (e) => {
 
+        //     new mapboxgl.Popup()
+        //     .setLngLat([l.Longitude, l.Latitude]) // long lat go here 
+        //     .setHTML([l.Name, l.Price, l.Rating]) // data goes here in place of description 
+        //     .addTo(map)})
+            
+        //     const coordinates = e.features[0].geometry.coordinates.slice();
+        //     console.log(coordinates)
+        //     const description = e.features[0].properties.description;
 } 
+
 
 d3.select("select")
     .on("change", function (e, d) {
         let newData = data.filter(d => d.Category === e.target.value);
-        // console.log(newData) 
         // let marker = new mapboxgl.Marker().addTo(map);
         if (currentMarkers!==null) {
             for (var i = currentMarkers.length - 1; i >= 0; i--) {

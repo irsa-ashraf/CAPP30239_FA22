@@ -15,7 +15,7 @@ const svg = d3.select("#heatmap")
 
 // Labels of row and columns
 const myGroups = ["American (New)", "Chinese", "Cocktail Bars", "French", "Italian", "Japanese", "Korean", "Mexican", "Seafood", "Thai"]
-const myVars = ["$", "$$", "$$$", "$$$$$"]
+const myVars = ["$", "$$", "$$$", "$$$$"]
 
 // Build X scales and axis:
 const x = d3.scaleBand()
@@ -24,8 +24,11 @@ const x = d3.scaleBand()
 .padding(0.001);
 svg.append("g")
 .attr("transform", `translate(0, ${height})`)
-// .attr("transform", "translate(-10, 0)rotate(-45)")
 .call(d3.axisBottom(x))
+.selectAll("text")
+.attr("dx", "-1.3em")
+.attr("dy", ".85em")
+.attr("transform", "rotate(-45)")
 
 // Build X scales and axis:
 const y = d3.scaleBand()
@@ -34,6 +37,7 @@ const y = d3.scaleBand()
 .padding(0.001);
 svg.append("g")
 .call(d3.axisLeft(y));
+
 
 // Build color scale (advanced heatmap)
 const myColor = d3.scaleSequential()
@@ -66,7 +70,7 @@ d3.select(this)
 }
 const mousemove = function (event, d) {
 tooltip
-    .html("The exact value of<br>this cell is: " + d.Rating)
+    .html("The average yelp rating of<br> this price and category is: " + d.Rating)
     .style("left", (event.x) / 2 + "px")
     .style("top", (event.y) / 2 + "px")
 }
@@ -117,6 +121,6 @@ svg.append("text")
 .style("font-size", "14px")
 .style("fill", "black")
 .style("max-width", 800)
-.text("The chart shows a breakdowm of average ratings received by a restaurant based on its the category and how expensive it is. \
+.text("The chart shows a breakdowm of average ratings received by a restaurant based on its the category and<br>how expensive it is. \
 Darker shade represents lower ratings");
 })();

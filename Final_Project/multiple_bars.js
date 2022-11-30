@@ -24,7 +24,8 @@ d3.csv("Cat_price_pcnt.csv").then(results => {
             .attr("viewBox", [0, -10, width, height]); // for resizing element in browser
 
         let x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.Percentage)]).nice()
+            // .domain([0, d3.max(data, d => d.Percentage)]).nice()
+            .domain([0, 91]).nice()
             .range([margin.left, width - margin.right]);
         
         let y = d3.scaleBand()
@@ -49,17 +50,17 @@ d3.csv("Cat_price_pcnt.csv").then(results => {
         bar.append("rect") // add rect to bar group
             .attr("fill", "teal")
             .attr("x", margin.left)
-            .attr("width", d => x(d.Percentage))
+            .attr("width", d => x(d.Percentage) - margin.left)
             .attr("y", d => y(d.Price))
             .attr("height", y.bandwidth());
         
         bar.append('text') // add labels
             .text(d => d.Percentage)
-            .attr('x', d => margin.left + x(d.Percentage) - 5)
+            .attr('x', d => x(d.Percentage) + 25) // change this for font 
             .attr('y', d => y(d.Price) + (y.bandwidth()/2))
-            .attr('text-anchor', 'end')
+            .attr('text-anchor', 'start')
             .attr('dominant-baseline', 'middle')
-            .style('fill', 'white');
+            .style('fill', 'black');
 
             // change title for each graph 
         svg.selectAll(".title")

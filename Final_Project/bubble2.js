@@ -26,7 +26,7 @@ d3.csv("bubble.csv").then(data => {
     let result = d3.group(data, d => d.Category);
 
     let rScale = d3.scaleLinear()
-        .range([6,12]) //Change size of curcles 
+        .range([8,18]) //Change size of circles 
         .domain(d3.extent(data, d => d.Count));
 
     let colors = d3.scaleOrdinal()
@@ -34,10 +34,14 @@ d3.csv("bubble.csv").then(data => {
         .domain(d3.map(data, d => d.Price));
 
     let simulation = d3.forceSimulation(data)
-        .force("charge", d3.forceManyBody().strength(1000)) //strength
-        .force('x', d3.forceX().x(250))
+        .force("charge", d3.forceManyBody().strength(500)) //strength
+        .force('x', d3.forceX().x(300))
+        // .force('x', d3.forceX().x(width/2))
+
         .force('y', d3.forceY().y(height/2))
         .force("collision", d3.forceCollide().radius(radius));
+        // .force("collision", d3.forceCollide().radius(20));  // check this code in class github 
+
 
     let g = svg.append("g")
         .attr("class", "group");
