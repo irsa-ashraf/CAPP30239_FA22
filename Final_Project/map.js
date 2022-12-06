@@ -26,36 +26,25 @@ d3.json("map_data.json").then((data) => {
         let marker = new mapboxgl.Marker({
         color: l.Color
         }).setLngLat([l.Longitude, l.Latitude])
-            .addTo(map)
-            .on('click', (e) => {console.log('Hello')})
-        currentMarkers.push(marker);
-        // map.on('click', (e) => {
-
-        //     new mapboxgl.Popup()
-        //     .setLngLat([l.Longitude, l.Latitude]) // long lat go here 
-        //     .setHTML([l.Name, l.Price, l.Rating]) // data goes here in place of description 
-        //     .addTo(map)})
-            
-        //     const coordinates = e.features[0].geometry.coordinates.slice();
-        //     console.log(coordinates)
-        //     const description = e.features[0].properties.description;
+            .setPopup(new mapboxgl.Popup().setHTML(`<strong>${l.Name}</strong><br>Price: ${l.Price || "Unknown"}<br>Rating: ${l.Rating}`))
+            .addTo(map);
+        currentMarkers.push(marker); 
 } 
 
 
 d3.select("select")
     .on("change", function (e, d) {
         let newData = data.filter(d => d.Category === e.target.value);
-        // let marker = new mapboxgl.Marker().addTo(map);
         if (currentMarkers!==null) {
             for (var i = currentMarkers.length - 1; i >= 0; i--) {
             currentMarkers[i].remove();
             }
         }
-        // console.log(e.target.value)
         for (var l of newData) {
             let marker = new mapboxgl.Marker({
             color: l.Color
             }).setLngLat([l.Longitude, l.Latitude])
+                .setPopup(new mapboxgl.Popup().setHTML(`<strong>${l.Name}</strong><br>Price: ${l.Price || "Unknown"}<br>Rating: ${l.Rating}`))
                 .addTo(map);
             currentMarkers.push(marker);
         }

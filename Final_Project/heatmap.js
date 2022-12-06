@@ -104,23 +104,4 @@ svg.selectAll()
     .on("mouseleave", mouseleave)
 })
 
-// Add title to graph
-// svg.append("text")
-// .attr("x", 0)
-// .attr("y", 0)
-// .attr("text-anchor", "end")
-// .style("font-size", "30px")
-// .text("Average Restaurant Ratings by Price and Category");
-
-
-// Add subtitle to graph
-svg.append("text")
-.attr("x", 0)
-.attr("y", -30)
-.attr("text-anchor", "left")
-.style("font-size", "14px")
-.style("fill", "black")
-.style("max-width", 800)
-.text("The chart shows a breakdowm of average ratings received by a restaurant based on its the category and<br>how expensive it is. \
-Darker shade represents lower ratings");
 })();

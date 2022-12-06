@@ -12,8 +12,8 @@ let svg = d3.select("#bubble-chart")
 
 // Handmade legend
 svg.append("circle").attr("cx",600).attr("cy",130).attr("r", 6).style("fill", "black")
-svg.append("circle").attr("cx",600).attr("cy",160).attr("r", 6).style("fill", "pink")
-svg.append("circle").attr("cx",600).attr("cy",190).attr("r", 6).style("fill", "red")
+svg.append("circle").attr("cx",600).attr("cy",160).attr("r", 6).style("fill", "gold")
+svg.append("circle").attr("cx",600).attr("cy",190).attr("r", 6).style("fill", "maroon")
 svg.append("circle").attr("cx",600).attr("cy",220).attr("r", 6).style("fill", "green")
 svg.append("text").attr("x", 620).attr("y", 135).text("$").style("font-size", "15px").attr("alignment-baseline","right")
 svg.append("text").attr("x", 620).attr("y", 165).text("$$").style("font-size", "15px").attr("alignment-baseline","right")
@@ -30,7 +30,7 @@ d3.csv("bubble.csv").then(data => {
         .domain(d3.extent(data, d => d.Count));
 
     let colors = d3.scaleOrdinal()
-        .range(['pink', 'red', 'black', 'green']) // change colors here 
+        .range(['gold', 'maroon', 'black', 'green']) // change colors here 
         .domain(d3.map(data, d => d.Price));
 
     let simulation = d3.forceSimulation(data)

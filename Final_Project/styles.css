@@ -1,0 +1,181 @@
+
+/* CONTAINER FOR TEXT  */
+
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h1 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+h4 {
+    font-size: 1em;
+    font-weight: normal;
+    text-align: center;
+}
+.introcontainer {
+    margin: 0 auto;
+    max-width: 1230px;
+    color: #faf7f7;
+    background-color: #90907b;
+    height: 10px;
+    padding: 2%;
+    text-align: center; 
+    text-decoration: solid;
+    font-size: 16px;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    color: #000000;
+    background-color: #f6f6f3;
+    height: auto;
+    padding: 3%;
+    /* text-align: center; */
+}
+.title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.flex {
+    display: flex;
+    width: 100%;
+    /* height: 300px; */
+}
+.flex .col {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+
+}
+.svg-tooltip {
+      background: rgba(21, 29, 46, 0.9);
+      border-radius: 5px;
+      color: #aaa;
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: none;
+      max-width: 320px;
+      padding: 1rem;
+      position: absolute;
+      text-overflow: ellipsis;
+      white-space: pre;
+      z-index: 300;
+      visibility: hidden;
+    }
+
+@media (max-width: 768px) {
+    .flex .col {
+        min-width: 100%;
+    }
+}
+
+/* CONATINER FOR IMAGES  */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    margin-bottom: 5px;
+}
+/* h2 {
+    font-size: 1em;
+    font-weight: normal;
+} */
+.image-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: #f6f6f3;
+    text-align: center;
+    padding: 3%;
+}
+.title {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+.flex {
+    display: flex;
+    width: 100%;
+    /* height: 300px; */
+}
+.flex .col {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+.svg-tooltip {
+      background: rgba(21, 29, 46, 0.9);
+      border-radius: 5px;
+      color: #aaa;
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: none;
+      max-width: 320px;
+      padding: 1rem;
+      position: absolute;
+      text-overflow: ellipsis;
+      white-space: pre;
+      z-index: 300;
+      visibility: hidden;
+    }
+
+@media (max-width: 768px) {
+    .flex .col {
+        min-width: 100%;
+    }
+}
+
+
+
+/* CODE FOR FLEX CONATINER  */
+
+* { font-family: Arial, Helvetica, sans-serif; }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        width: 100%;
+        max-width: 1200px;
+        height: 100vh;
+        overflow: auto;
+        flex-direction: row;
+        margin: 0 auto;
+    }
+    .flex-container .flex-item {
+        width: 100%;
+        min-height: 500px;
+        margin: 5px;
+        background-color: #zzzz;
+    }
+    #horizontal-chart svg { display:inline-block; width:27.5% }  
+    text { font-size: 16px; }
+    /* Responsive Design */
+    @media only screen and (max-width: 600px) {
+        .flex-container {
+            display: block;
+            width: 80%;
+            height: auto;
+            background-color: #zzzz
+        }
+        .flex-container .flex-item { min-height: auto; }
+    }
+
+body {
+        margin: 0;
+        padding: 0;
+    }
+    /* Change this to fix map? */
+    #map {
+        width: 100%;
+        height: 500px
+    }
+
+    #barchart svg { display:inline-block; width:70.5% }
+        {width: 80%;
+        height: 400px
+    } 

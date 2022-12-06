@@ -48,7 +48,7 @@ d3.csv("Cat_price_pcnt.csv").then(results => {
             .attr("class", "bar");
 
         bar.append("rect") // add rect to bar group
-            .attr("fill", "teal")
+            .attr("fill", "orange")
             .attr("x", margin.left)
             .attr("width", d => x(d.Percentage) - margin.left)
             .attr("y", d => y(d.Price))
